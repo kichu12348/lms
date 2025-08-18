@@ -28,12 +28,12 @@ export const createCourse = async (req: Request, res: Response) => {
 
 export const createModule = async (req: Request, res: Response) => {
   const { courseId } = req.params;
-  const { title, description, videoUrl } = req.body;
+  const { title, description, videoId } = req.body;
 
-  if (!title || !videoUrl || !courseId) {
+  if (!title || !videoId || !courseId) {
     return res
       .status(400)
-      .json({ error: "Title, videoUrl, and courseId are required." });
+      .json({ error: "Title, videoId, and courseId are required." });
   }
 
   try {
@@ -46,7 +46,7 @@ export const createModule = async (req: Request, res: Response) => {
       data: {
         title,
         description: description || null,
-        videoUrl,
+        videoId,
         course: {
           connect: { id: courseId },
         },
@@ -96,9 +96,9 @@ export const updateCourse = async (req: Request, res: Response) => {
 
 export const updateModule = async (req: Request, res: Response) => {
   const { moduleId } = req.params;
-  const { title, description, videoUrl } = req.body;
+  const { title, description, videoId } = req.body;
 
-  if (!title && !description && !videoUrl) {
+  if (!title && !description && !videoId) {
     return res.status(400).json({ error: "Please provide data to update." });
   }
 
@@ -110,7 +110,7 @@ export const updateModule = async (req: Request, res: Response) => {
       data: {
         title,
         description,
-        videoUrl,
+        videoId,
       },
     });
 
