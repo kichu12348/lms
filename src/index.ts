@@ -1,8 +1,13 @@
 import express from "express";
+import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes";
 import adminRoutes from "./routes/admin.routes";
 import studentRoutes from "./routes/student.routes";
 import { protectAdmin, protectStudent } from "./middleware/authMiddleware";
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 const app = express();
 
