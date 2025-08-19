@@ -18,6 +18,8 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "google-auth-library": "^10.2.1",
+    "googleapis": "^156.0.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "prisma": "^6.14.0"

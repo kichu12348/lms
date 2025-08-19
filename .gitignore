@@ -7,6 +7,9 @@ yarn.lock
 bun.lock
 index.html
 
+client_secret.json
+token.json
+
 uploads/
 
 # Build output
