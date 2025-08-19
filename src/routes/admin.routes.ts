@@ -16,6 +16,7 @@ import {
   getAllStudents,
   getStudentById,
 } from "../controllers/studentController";
+import { uploadVideo } from "../controllers/videoUploadController";
 
 const router = Router();
 
@@ -37,5 +38,8 @@ router.get("/students/:studentId", getStudentById);
 router.post("/students", createStudent);
 router.put("/students/:studentId", updateStudent);
 router.delete("/students/:studentId", deleteStudent);
+
+// Video Upload
+router.post("/videos/upload", uploadVideo);
 
 export default router;

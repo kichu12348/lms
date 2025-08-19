@@ -5,6 +5,9 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 bun.lock
+index.html
+
+uploads/
 
 # Build output
 dist

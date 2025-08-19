@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+import fs from "fs";
+import path from "path";
 import authRoutes from "./routes/auth.routes";
 import adminRoutes from "./routes/admin.routes";
 import studentRoutes from "./routes/student.routes";
@@ -11,7 +14,17 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 
+const uploadsDir = path.join(__dirname, "../uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
 app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.get("/", (_, res) => {
   res.json({
