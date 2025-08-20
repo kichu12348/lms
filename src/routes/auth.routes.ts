@@ -5,9 +5,14 @@ import { getAuthUrl, saveToken } from "../lib/youtubeAuth";
 
 const router = Router();
 
+let hasAuth = false;
+
 router.post("/login", login);
 
 router.get("/google", async (req: Request, res: Response) => {
+    if (hasAuth) {
+        return res.status(400).json({ error: "No" });
+    }
     try {
         const url = await getAuthUrl();
         res.redirect(url);
@@ -18,6 +23,9 @@ router.get("/google", async (req: Request, res: Response) => {
 });
 
 router.get("/google/callback", async (req: Request, res: Response) => {
+    if (hasAuth) {
+        return res.status(400).json({ error: "No" });
+    }
     const { code } = req.query;
     if (typeof code !== 'string') {
         return res.status(400).send("Invalid authorization code.");
@@ -25,6 +33,7 @@ router.get("/google/callback", async (req: Request, res: Response) => {
     try {
         await saveToken(code);
         res.send("Authentication successful! You can close this tab.");
+        hasAuth = true;
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to save authentication token." });

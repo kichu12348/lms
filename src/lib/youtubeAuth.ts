@@ -12,7 +12,7 @@ let oauth2Client: OAuth2Client | null = null;
 async function getOauthClient(): Promise<OAuth2Client> {
     if (oauth2Client) return oauth2Client;
 
-    const secrets = await fs.readFile(CLIENT_SECRET_PATH, "utf-8");
+    const secrets = process.env.CLIENT_SECRET || "";
     const credentials = JSON.parse(secrets);
     const { client_secret, client_id, redirect_uris } = credentials.web;
 
@@ -22,7 +22,6 @@ async function getOauthClient(): Promise<OAuth2Client> {
         const token = await fs.readFile(TOKEN_PATH, "utf-8");
         client.setCredentials(JSON.parse(token));
     } catch (err) {
-        // This is fine, it just means we need to authenticate.
     }
     
     oauth2Client = client;
