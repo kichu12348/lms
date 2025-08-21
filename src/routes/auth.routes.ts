@@ -33,7 +33,7 @@ router.get("/google/callback", async (req: Request, res: Response) => {
     try {
         await saveToken(code);
         res.send("Authentication successful! You can close this tab.");
-        hasAuth = true;
+        hasAuth = true; // prevent re-authentication
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to save authentication token." });
